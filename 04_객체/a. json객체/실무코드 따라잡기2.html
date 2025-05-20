@@ -14,7 +14,8 @@
                   year: 2020,
                   genre: ['드라마', '로맨스'],
                   episodes: 16,
-                  cast: ['박서준', '김다미'],
+                  // cast: ['박서준', '김다미'],
+                  cast: ['박서준', '김다미', '유재명', '권나라'],
                   synopsis: '편견과 불공정에 맞서 싸우는 청년의 성공 스토리.',
                },
                {
@@ -86,63 +87,76 @@
                   year: 2019,
                   genre: ['좀비', '사극'],
                   episodes: 6,
-                  cast: ['주지훈', '류승룡'],
+                  // cast: ['주지훈', '류승룡'],
+                  cast: ['주지훈', '류승룡', '배두나'],
                   synopsis: '조선 시대에 퍼진 좀비 역병을 막기 위한 왕자의 투쟁을 다룬 이야기.',
                },
             ],
          }
 
          const dramas = data.result
-
-         // JSON객체 데이터 출력
          console.log(dramas)
-         console.log(dramas[0])
-         console.log(dramas[1])
-         console.log(dramas[2])
-         console.log('----------')
 
-         // 드라마 제목, 년도 출력
-         console.log(dramas[0].title, dramas[0].year)
-         console.log(dramas[1].title, dramas[1].year)
-         console.log(dramas[2].title, dramas[2].year)
-         console.log('----------')
+         // 1. 드라마 제목, 줄거리, 주연배우만 모두 출력해 주세요.
+         // dramas.forEach((drama) => {
+         //    document.write(`<p>제목: ${drama.title} | 줄거리: ${drama.synopsis} | 주연배우: ${drama.cast}</p>`)
+         // })
 
-         // 드라마 제목, 장르 출력
-         console.log(dramas[0].title, dramas[0].genre)
-         console.log(dramas[1].title, dramas[1].genre)
-         console.log(dramas[2].title, dramas[2].genre)
-         console.log('----------')
+         // 1번 문제에서 드라마마다 주연배우 인원이 다르면 어떻게 출력해야 할까?
+         // -> map을 이용
+         dramas.forEach((drama) => {
+            document.write(`<p>제목: ${drama.title} | 줄거리: ${drama.synopsis} | 주연배우: ${drama.cast.map((actor) => actor + '님')}</p>`)
+         })
 
-         //드라마 제목, 주연배우 중 한명만 출력
-         console.log(dramas[0].title, dramas[0].cast[0])
-         console.log(dramas[1].title, dramas[1].cast[0])
-         console.log(dramas[2].title, dramas[2].cast[0])
-         console.log('----------')
+         // 2. 드라마 장르 중 판타지에 해당하는 드라마 제목만 출력해 주세요.
+         document.write(`<hr />`)
+         document.write(`<h2>판타지 드라마</h2>`)
 
-         // 드라마 주연배우 추가
-         dramas[0].cast.push('권나라')
-         dramas[1].cast.push('서지혜')
-         dramas[2].cast.push('조현철')
+         /*
+         const result1 = dramas.filter((drama) => {
+            const genres = drama.genre // 장르만 추출
 
-         console.log(dramas[0].cast)
-         console.log(dramas[1].cast)
-         console.log(dramas[2].cast)
-         console.log('----------')
+            // 장르가 판타지인 객체데이터만 result1에 저장
+            for (const genre of genres) {
+               if (genre === '판타지') return true
+            }
+         })
 
-         // 이태원 클라쓰 시놉시스 수정하기
-         dramas[0].synopsis = '불합리한 세상 속, 고집과 객기로 뭉친 청춘들의 힙한 반란이 시작된다. 세계를 압축해 놓은 듯한 이태원. 이 작은 거리, 각자의 가치관으로 자유를 쫓는 그들의 창업 신화 <이태원 클라쓰>'
+         result1.forEach((drama) => {
+            document.write(`<p>${drama.title}</p>`)
+         })
+         */
 
-         console.log(dramas[0])
-         console.log('------------')
+         // 함수의 체이닝
+         /*
+         const result1 = dramas
+            .filter((drama) => {
+               const genres = drama.genre // 장르만 추출
 
-         // 킹덤 장르 '좀비' -> '공포'로 수정하기
-         console.log(dramas[9].genre)
-         dramas[9].genre[0] = '공포'
-         console.log(dramas[9])
+               // 장르가 판타지인 객체데이터만 result1에 저장
+               for (const genre of genres) {
+                  if (genre === '판타지') return true
+               }
+            })
+            .forEach((drama) => {
+               document.write(`<p>${drama.title}</p>`)
+            })
+            */
 
-         // 킹덤 시놉시스 삭제하기
-         delete dramas[9].synopsis
-         console.log(dramas[9])
+         // includes 함수 사용
+
+         /*
+         const result1 = dramas
+            .filter((drama) => {
+               // 판타지가 배열에 포함되어 있으면 return true
+               return drama.genre.includes('판타지')
+            })
+            .forEach((drama) => {
+               document.write(`<p>${drama.title}</p>`)
+            })
+         */
+
+         const result1 = dramas.filter((drama) => drama.genre.includes('판타지')).forEach((drama) => document.write(`<p>${drama.title}</p>`))
       </script>
    </body>
 </html>
