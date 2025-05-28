@@ -13,13 +13,44 @@ const getPlayingMovies = async (url) => {
       const res = await fetch(url, options)
       const data = await res.json()
 
-      data.results.forEach((result) => {
-         console.log(result.title)
-         console.log(result.id)
-         console.log(result.poster_path)
-         console.log(result.vote_average)
-         console.log('')
-      })
+      const results = data.results
+      //   console.log(results)
+
+      const container = document.querySelector('main .container')
+      let rowsHtml = '' // 모든 row를 담을 변수
+
+      // card 5행 4열
+      // results.length = 20
+      for (let i = 0; i < results.length; i += 4) {
+         let rowHtml = '<div class="row">' // 하나의 row를 담을 변수
+
+         for (let j = 0; j < 4; j++) {
+            const index = i + j
+            // if (index >= results.length) break //results 배열을 벗어나면 중단
+
+            const movie = results[index]
+            // console.log(movie)
+
+            rowHtml += `
+                <div class="col-sm-3 p-3">
+                     <div class="card">
+                        <a href="#">
+                           <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" class="card-img-top poster" alt="${movie.title}" />
+                        </a>
+                        <div class="card-body">
+                           <p class="card-text title">${movie.title}</p>
+                           <p class="card-text average">${movie.vote_average.toFixed(1)}점</p>
+                        </div>
+                     </div>
+                </div>
+             `
+         }
+
+         rowHtml += '</div>'
+         rowsHtml += rowHtml
+      }
+
+      container.innerHTML = rowsHtml
    } catch (error) {
       console.log('에러발생:', error)
    }
