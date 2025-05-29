@@ -39,7 +39,7 @@ const getPlayingMovies = async (url) => {
                         </a>
                         <div class="card-body">
                            <p class="card-text title">${movie.title}</p>
-                           <p class="card-text average">${movie.vote_average.toFixed(1)}점</p>
+                           <p class="card-text average">${Number(movie.vote_average) === 0 ? '미반영' : movie.vote_average.toFixed(1) + '점'}</p>
                         </div>
                      </div>
                 </div>

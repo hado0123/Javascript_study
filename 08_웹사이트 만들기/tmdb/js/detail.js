@@ -13,12 +13,12 @@ const movieId = urlParams.get('movie_id')
 const movieDetailUrl = `https://api.themoviedb.org/3/movie/${movieId}?language=ko-KR`
 const mainContainer = document.querySelector('main .container')
 
+// 1. 영화 상세정보 바인딩
+
 const getDetailMovie = async (movieDetailUrl) => {
    try {
       const response = await fetch(movieDetailUrl, options)
       const data = await response.json()
-
-      console.log(data)
 
       const imgSrc = `https://image.tmdb.org/t/p/w300${data.poster_path}`
 
@@ -31,11 +31,11 @@ const getDetailMovie = async (movieDetailUrl) => {
                      <h2>${data.title}</h2>
                      <ul class="movie-info">
                         <li>개봉일 ${data.release_date}</li>
-                        <li>${data.genres}</li>
+                        <li>${data.genres.map((genre) => genre.name)}</li>
                         <li>${data.runtime}분</li>
                      </ul>
-                     <p>평점</p>
-                     <p>줄거리</p>
+                     <p>평점 ${Number(data.vote_average) === 0 ? '미반영' : data.vote_average.toFixed(1)}</p>
+                     <p>${data.overview}</p>
                   </div>
                </div> 
       `
@@ -47,3 +47,20 @@ const getDetailMovie = async (movieDetailUrl) => {
 }
 
 getDetailMovie(movieDetailUrl)
+
+// 2. 출연 배우 데이터 바인딩
+
+const movieCreditsUrl = `https://api.themoviedb.org/3/movie/${movieId}/credits?language=ko-KR`
+
+const getCreditsMovie = async (movieCreditsUrl) => {
+   try {
+      const response = await fetch(movieCreditsUrl, options)
+      const data = await response.json()
+
+      console.log(data)
+   } catch (error) {
+      console.error('에러 발생:', error)
+   }
+}
+
+getCreditsMovie(movieCreditsUrl)
