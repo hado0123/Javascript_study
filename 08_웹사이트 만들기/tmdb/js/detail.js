@@ -43,8 +43,11 @@ const getDetailMovie = async (movieDetailUrl) => {
       mainContainer.innerHTML += rowHtml
 
       // getDetailMovie 함수가 완료 될때까지 기다렸다가 getCreditsMovie 함수 실행
-      // getCreditsMovie는 비동기 함수이므로 await를 붙여준다
+      // getCreditsMovie는 비동기 함수이므로 await를 붙여준다 -> getCreditsMovie 함수 아래에 순차적으로 실행해야 하는 코드가 있는 경우 await를 반드시 붙여야 하고 그렇지 않을 경우는 붙여도 되고 안붙여도 된다
       await getCreditsMovie(movieCreditsUrl)
+
+      // console.log('어떤 코드1')
+      // console.log('어떤 코드2')
    } catch (error) {
       console.error('에러 발생:', error)
    }

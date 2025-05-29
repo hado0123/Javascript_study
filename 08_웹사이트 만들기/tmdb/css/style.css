@@ -32,6 +32,20 @@ main .container {
    padding: 40px 0;
 }
 
+/* card height 안맞는 부분 수정 */
+main .container .row .card {
+   height: 100%;
+}
+
+main .container .row .card a {
+   height: 80%;
+}
+
+main .container .row .card img {
+   height: 100%; /* 이미지 높이 */
+   object-fit: cover; /* 이미지를 높이에 맞추고 너비는 자동으로 조절(이미지 비율을 살리면서 전체적으로 cover) */
+}
+
 /* detail.html */
 
 main .container .movie-detail > ul.movie-info,
