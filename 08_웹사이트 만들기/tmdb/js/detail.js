@@ -24,10 +24,10 @@ const getDetailMovie = async (movieDetailUrl) => {
 
       const rowHtml = `
                <div class="row">
-                  <div class="col-sm-4">
-                     <img src="${imgSrc}" alt="${data.title}" class="poster-detail" />
+                  <div class="col-sm-3" style="text-align:center">
+                     <img src="${imgSrc}" alt="${data.title}" class="poster-detail" style="max-width:100%" />
                   </div>
-                  <div class="col-sm-8 movie-detail">
+                  <div class="col-sm-9 movie-detail">
                      <h2>${data.title}</h2>
                      <ul class="movie-info">
                         <li>개봉일 ${data.release_date}</li>
