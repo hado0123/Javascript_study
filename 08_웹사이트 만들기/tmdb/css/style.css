@@ -31,3 +31,18 @@ footer {
 main .container {
    padding: 40px 0;
 }
+
+/* detail.html */
+
+main .container .movie-detail > ul.movie-info,
+p {
+   margin-bottom: 10px !important;
+}
+
+main .container ul.movie-info {
+   display: flex;
+}
+
+main .container ul.movie-info li {
+   padding-right: 13px;
+}
