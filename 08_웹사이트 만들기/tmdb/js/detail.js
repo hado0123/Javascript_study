@@ -62,13 +62,20 @@ const getCreditsMovie = async (movieCreditsUrl) => {
       let castRowHtml = `<div class="row" style="margin-top:30px">`
 
       // 출연배우 6명만 출력
-      for (let i = 0; i < 6; i++) {
+      // data.cast.length: 배우가 6명 미만일 경우 에러나는 걸 처리
+      for (let i = 0; i < data.cast.length; i++) {
          console.log(data.cast[i])
+
+         if (i === 6) break // 7명째 되면 for문 종료(6명만 출력)
+
+         // null 은 false
+         // profile_path가 null이면 person.png를 보여줌
+         let profileImg = !data.cast[i].profile_path ? `./images/person.png` : `https://image.tmdb.org/t/p/w200${data.cast[i].profile_path}`
 
          castRowHtml += `
              <div class='col-sm-2 p-3'>
                 <div class="card">
-                  <img src="https://image.tmdb.org/t/p/w200${data.cast[i].profile_path}" class="card-img-top" alt="${data.cast[i].name}">
+                  <img src="${profileImg}" class="card-img-top" alt="${data.cast[i].name}">
                      <div class="card-body">
                        <p class="card-text">${data.cast[i].name}</p>
                      </div>
