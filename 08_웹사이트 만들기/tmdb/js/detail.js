@@ -41,6 +41,10 @@ const getDetailMovie = async (movieDetailUrl) => {
       `
 
       mainContainer.innerHTML += rowHtml
+
+      // getDetailMovie 함수가 완료 될때까지 기다렸다가 getCreditsMovie 함수 실행
+      // getCreditsMovie는 비동기 함수이므로 await를 붙여준다
+      await getCreditsMovie(movieCreditsUrl)
    } catch (error) {
       console.error('에러 발생:', error)
    }
@@ -57,15 +61,11 @@ const getCreditsMovie = async (movieCreditsUrl) => {
       const response = await fetch(movieCreditsUrl, options)
       const data = await response.json()
 
-      console.log(data.cast)
-
       let castRowHtml = `<div class="row" style="margin-top:30px">`
 
       // 출연배우 6명만 출력
       // data.cast.length: 배우가 6명 미만일 경우 에러나는 걸 처리
       for (let i = 0; i < data.cast.length; i++) {
-         console.log(data.cast[i])
-
          if (i === 6) break // 7명째 되면 for문 종료(6명만 출력)
 
          // null 은 false
@@ -91,5 +91,3 @@ const getCreditsMovie = async (movieCreditsUrl) => {
       console.error('에러 발생:', error)
    }
 }
-
-getCreditsMovie(movieCreditsUrl)
