@@ -34,7 +34,7 @@ const getPlayingMovies = async (url) => {
             rowHtml += `
                 <div class="col-sm-3 p-3">
                      <div class="card">
-                        <a href="#">
+                        <a href="./detail.html?movie_id=${movie.id}">
                            <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" class="card-img-top poster" alt="${movie.title}" />
                         </a>
                         <div class="card-body">
